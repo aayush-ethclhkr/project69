@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Python Learning Platform</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="styles_cybersec.css">
+</head>
+<body>  
+
+  <!-- Sidebar Navigation -->
+  <nav>
+    <div class="nav-header">
+      <h2>Cybersecurity Tools</h2>
+    </div>
+    <div class="problem-list">
+      <ul id="topics">
+        <li onclick="loadQuestion('intro')" class="active">
+          <i class="fas fa-info-circle"></i><span>Introduction</span>
+        </li>
+        <li onclick="loadQuestion('password_strength')">
+          <i class="fas fa-lock"></i><span>Password Strength Checker</span>
+        </li>
+        <li onclick="loadQuestion('password_manager')">
+          <i class="fas fa-key"></i><span>Password Manager</span>
+        </li>
+        <li onclick="loadQuestion('silent_screen_monitor')">
+          <i class="fas fa-eye"></i><span>Silent Screen Monitoring</span>
+        </li>
+        <li onclick="loadQuestion('log_analyzer')">
+          <i class="fas fa-file-contract"></i><span>Log Analyzer</span>
+        </li>
+        <li onclick="loadQuestion('t5')">
+          <i class="fas fa-keyboard"></i><span>Key Logger</span>
+        </li>
+        <li onclick="loadQuestion('t6')">
+          <i class="fas fa-dice-d6"></i><span>CTF</span>
+        </li>
+        <li onclick="loadQuestion('t7')">
+          <i class="fas fa-bug"></i><span>Malware Detector</span>
+        </li>
+        <li onclick="loadQuestion('t8')">
+          <i class="fas fa-file-archive"></i><span>File Integrity</span>
+        </li>
+        <li onclick="loadQuestion('t9')">
+          <i class="fas fa-folder"></i><span>List Files</span>
+        </li>
+        
+    
+        <li onclick="loadQuestion('t12')">
+          <i class="fas fa-wrench"></i><span>CTF (Decoder)</span>
+        </li>
+        <li onclick="loadQuestion('t13')">
+          <i class="fas fa-shield-alt"></i><span>Firewall Audit</span>
+        </li>
+      </ul>
+    </div>       
+    
+  </nav>
+
+  <!-- Main Content -->
+  <div class="content">
+    <div class="header">
+      <h1>Cybersecurity tools platform</h1>
+    </div>
+
+    <div class="main-content">
+      <!-- Question Area -->
+      <div id="questionArea" class="question-box">
+        <h2><i class="fas fa-question-circle"></i> Welcome to Python Training Camp</h2>
+        <p>Select a challenge from the sidebar to begin your Python training mission.</p>
+      </div>
+
+      <!-- Code Editor -->
+      <div class="code-editor">
+        <div class="editor-header">
+          <h3><i class="fas fa-code"></i> Code Editor</h3>
+          <button class="run-btn" onclick="runCode()"><i class="fas fa-play"></i> Run Code</button>
+        </div>
+
+        <div class="editor-wrapper">
+             <div id="highlighted-code" class="editor-background"></div>
+             <div id="code" class="editor-foreground" contenteditable="true"></div>
+        </div>
+  
+
+         <!-- Input Section -->
+        
+
+      <!-- Output -->
+      <div class="output-container">
+        <div class="output-header">
+          <h3><i class="fas fa-terminal"></i> Output</h3>
+        </div>
+        <div id="output"># Your program output will appear here...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Dialog -->
+  <div id="simpleDialog" class="modal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeDialog()">&times;</span>
+      <div id="dialogContent"></div>
+    </div>
+  </div>
+
+  <!-- JS Scripts -->
+  <script src="questions_cybersec.js"></script>
+  <script src="main_cybersec.js"></script>
+</body>
+</html>

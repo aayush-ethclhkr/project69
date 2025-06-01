@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Army Command Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --military-green: #206020;
+            --dark-green: #154015;
+            --navy-blue: #003366;
+            --airforce-blue: #2a4b6e;
+            --sky-blue: #4d8fc9;
+            --gold: #FFD700;
+            --gold-braid: #c9a53d;
+            --alert-red: #a30000;
+            --light-gray: #f0f0f0;
+            --khaki-light: #f0e6d2;
+            --dark-gray: #333333;
+            --combat-black: #1a1a1a;
+            --sidebar-width: 300px;
+            --right-sidebar-width: 300px;
+            --header-height: 100px;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--khaki-light);
+            color: var(--combat-black);
+            overflow-x: hidden;
+        }
+        
+        /* Enhanced Header */
+        .header {
+            background: linear-gradient(135deg, var(--navy-blue), var(--military-green));
+            height: var(--header-height);
+            padding: 0 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 3px solid var(--gold);
+        }
+        
+        .header-logo {
+            height: 70px;
+            width: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));
+        }
+        
+        .header-title {
+            text-align: center;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .header-title h1 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .header-title p {
+            font-size: 18px;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+        
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+        
+        .header-icon {
+            font-size: 24px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .header-icon:hover {
+            color: var(--gold);
+            transform: scale(1.1);
+        }
+        
+        .notification-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--alert-red);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            border: 2px solid var(--navy-blue);
+        }
+        
+        /* Left Sidebar - Training Modules */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: linear-gradient(to bottom, #001a33, #002244);
+            position: fixed;
+            left: 0;
+            top: var(--header-height);
+            bottom: 0;
+            padding: 25px 0;
+            color: white;
+            box-shadow: 3px 0 10px rgba(0, 0, 0, 0.3);
+            z-index: 90;
+            overflow-y: auto;
+            border-right: 1px solid rgba(255, 215, 0, 0.2);
+        }
+        
+        .sidebar-section {
+            margin-bottom: 30px;
+            padding: 0 25px;
+        }
+        
+        .sidebar-section h3 {
+            color: var(--gold);
+            font-size: 18px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .sidebar-section h3 i {
+            font-size: 20px;
+        }
+        
+        .training-module {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid transparent;
+        }
+        
+        .training-module:hover {
+            background: rgba(51, 153, 204, 0.3);
+            transform: translateX(5px);
+            border-color: rgba(255, 215, 0, 0.3);
+        }
+        
+        .training-module.active {
+            background: rgba(51, 153, 204, 0.4);
+            border-left: 4px solid var(--gold);
+            border-color: rgba(255, 215, 0, 0.5);
+        }
+        
+        .training-module i {
+            font-size: 18px;
+            color: var(--sky-blue);
+            min-width: 25px;
+        }
+        
+        .training-module .module-name {
+            font-size: 16px;
+            flex-grow: 1;
+            font-weight: 500;
+        }
+        
+        .training-module .module-progress {
+            height: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+        
+        .training-module .progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, var(--gold), #ffea00);
+            border-radius: 5px;
+            width: 0%;
+            transition: width 0.5s;
+        }
+        
+        /* Right Sidebar - Contests and Chatbot */
+        .right-sidebar {
+            width: var(--right-sidebar-width);
+            background: linear-gradient(to bottom, #001a33, #002244);
+            position: fixed;
+            right: 0;
+            top: var(--header-height);
+            bottom: 0;
+            padding: 25px;
+            color: white;
+            box-shadow: -3px 0 10px rgba(0, 0, 0, 0.3);
+            z-index: 90;
+            overflow-y: auto;
+            border-left: 1px solid rgba(255, 215, 0, 0.2);
+        }
+        
+        .challenge-section {
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .challenge-section h3 {
+            color: var(--gold);
+            font-size: 16px;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .challenge-section h3 i {
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        .challenge-content {
+            line-height: 1.5;
+            font-size: 14px;
+        }
+        
+        .challenge-content ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin: 10px 0;
+        }
+        
+        .challenge-content li {
+            margin-bottom: 8px;
+            padding-left: 18px;
+            position: relative;
+        }
+        
+        .challenge-content li:before {
+            content: "•";
+            color: var(--gold);
+            position: absolute;
+            left: 0;
+        }
+        
+        .challenge-btn {
+            background: var(--gold);
+            color: var(--dark-gray);
+            border: none;
+            border-radius: 4px;
+            padding: 6px 12px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            display: inline-block;
+        }
+        
+        .challenge-btn:hover {
+            background: #e6c200;
+        }
+        
+        .chatbot-section {
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 8px;
+            padding: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .chatbot-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        
+        .chatbot-header h3 {
+            color: var(--gold);
+            font-size: 16px;
+            margin: 0;
+        }
+        
+        .close-button {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 3px;
+        }
+        
+        .close-button:hover {
+            color: var(--gold);
+        }
+        
+        .chatbot-messages {
+            height: 180px;
+            overflow-y: auto;
+            margin-bottom: 12px;
+            padding: 8px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+        }
+        
+        .message {
+            margin-bottom: 8px;
+            padding: 6px 10px;
+            border-radius: 4px;
+            max-width: 85%;
+            font-size: 13px;
+        }
+        
+        .bot-message {
+            background: rgba(255, 215, 0, 0.1);
+            border-left: 3px solid var(--gold);
+            margin-right: auto;
+        }
+        
+        .user-message {
+            background: rgba(0, 51, 102, 0.3);
+            border-right: 3px solid var(--sky-blue);
+            margin-left: auto;
+        }
+        
+        .chatbot-input-container {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .chatbot-input {
+            flex: 1;
+            padding: 8px 10px;
+            border: none;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 13px;
+        }
+        
+        .chatbot-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 13px;
+        }
+        
+        .chatbot-send {
+            background: var(--gold);
+            color: var(--dark-gray);
+            border: none;
+            border-radius: 4px;
+            padding: 0 12px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 13px;
+        }
+        
+        .chatbot-send:hover {
+            background: #e6c200;
+        }
+        
+        /* Main Content Area */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            margin-right: 320px; /* 300px for panel + 20px gap */
+            padding: 30px;
+            min-height: calc(100vh - var(--header-height));
+            transition: all 0.3s;
+            background-color: var(--khaki-light);
+        }
+        
+        .content-area {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            border-top: 4px solid var(--gold);
+        }
+        
+        .content-area:hover {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+        }
+        
+        .content-area i {
+            font-size: 50px;
+            color: var(--gold);
+            margin-bottom: 20px;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .content-area h2 {
+            color: var(--navy-blue);
+            font-size: 24px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .content-area p {
+            max-width: 600px;
+            margin-bottom: 25px;
+            font-size: 15px;
+            line-height: 1.6;
+            color: var(--dark-gray);
+        }
+        
+        .content-btn {
+            background: var(--gold);
+            color: var(--dark-gray);
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .content-btn:hover {
+            background: #e6c200;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Footer */
+        .footer {
+            background: linear-gradient(90deg, var(--navy-blue), var(--military-green));
+            text-align: center;
+            padding: 15px;
+            color: white;
+            font-size: 13px;
+            border-top: 1px solid rgba(255, 215, 0, 0.3);
+            margin-left: var(--sidebar-width);
+            margin-right: var(--right-sidebar-width);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .right-sidebar {
+                width: 280px;
+            }
+            .main-content {
+                margin-right: 300px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .right-sidebar {
+                transform: translateX(100%);
+                transition: transform 0.3s;
+            }
+            .right-sidebar.active {
+                transform: translateX(0);
+            }
+            .main-content {
+                margin-right: 0;
+            }
+            .footer {
+                margin-right: 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                height: 70px;
+                padding: 0 15px;
+            }
+            .header-logo {
+                height: 45px;
+            }
+            .header-title h1 {
+                font-size: 18px;
+            }
+            .header-title p {
+                font-size: 14px;
+            }
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s;
+                width: 260px;
+            }
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            .main-content {
+                margin-left: 0;
+                padding: 20px;
+            }
+            .footer {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Enhanced Header with Logos -->
+    <header class="header">
+        <img src="static/logo.png" alt="MCTE Logo" class="header-logo">
+        <div class="header-title">
+            <h1>FACULTY OF COMPUTER TECHNOLOGY
+            System and IT Wing </h1>
+        </div>
+        <img src="static/army.png" alt="ARMY Logo" class="header-logo">
+    </header>
+    
+    <!-- Left Sidebar - Training Modules -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-section">
+            <h3><i class="fas fa-graduation-cap"></i> Training Modules</h3>
+
+        </div>
+            <div class="training-module active" onclick="loadContent('basic-training')">
+            
+                <i class="fas fa-book"></i>
+                
+                <div>
+                    <div class="module-name">Basics of Python </div>
+                    <div class="module-progress">
+                        <div class="progress-bar" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+                
+            <div class="training-module" onclick="loadContent('cyber')">
+                <i class="fas fa-shield-alt"></i>
+                
+                <div>
+                    <div class="module-name">Cyber Security</div>
+                    <div class="module-progress">
+                        <div class="progress-bar" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="training-module" onclick="loadContent('data-viz')">
+                <i class="fas fa-chart-bar"></i>
+                
+                    <div class="data-module">
+                        <div class="module-name">Data Visualization</div>
+                        <div class="module-progress">
+                            <div class="progress-bar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="training-module" onclick="loadContent('ai-ml')">
+                <i class="fas fa-brain"></i>
+                
+                <div>
+                    <div class="module-name">AI & ML</div>
+                    <div class="module-progress">
+                        <div class="progress-bar" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="training-module" onclick="loadContent('practice')">
+                <i class="fas fa-question-circle"></i>
+                
+                <div>
+                    <div class="module-name">Practice Questions</div>
+                    <div class="module-progress">
+                        <div class="progress-bar" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Right Sidebar - Contests and Chatbot -->
+    <div class="right-sidebar" id="rightSidebar">
+        <!-- Solve Live Challenge Section -->
+        <div class="challenge-section">
+            <h3>Solve Live Challenge <i class="fas fa-code"></i></h3>
+            <div class="challenge-content">
+                <p>Complete the basic Python programming exercises to test your understanding of core concepts.</p>
+                
+                <button class="challenge-btn">Start Challenge</button>
+            </div>
+        </div>
+        
+        <!-- New Contest Section -->
+        <div class="challenge-section">
+            <h3>New Contest  <i class="fas fa-trophy"></i></h3>
+            <div class="challenge-content">
+                <p>Join the latest made challenge</p>
+                
+                <button class="challenge-btn">Create Contest</button>
+            </div>
+        </div>
+        
+        <!-- Chatbot Section -->
+        <div class="chatbot-section">
+            <div class="chatbot-header">
+                <h3>Command Assistant</h3>
+                <button class="close-button" id="chatbotCloseBtn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="chatbot-messages" id="chatbotMessages">
+                <div class="message bot-message">
+                    <p>Hello! I'm your Python coding assistant. How can I help you today?</p>
+                </div>
+            </div>
+            <div class="chatbot-input-container">
+                <input type="text" class="chatbot-input" id="chatbotUserInput" placeholder="Type your message...">
+                <button class="chatbot-send" id="chatbotSendBtn">Send</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Content Area -->
+    <div class="main-content" id="mainContent">
+        <div class="content-area" id="contentArea">
+            <i class="fas fa-flag"></i>
+            <h2>Welcome to Command Center</h2>
+            <p>Select a training module from the left sidebar to begin your learning journey. Participate in live challenges or chat with the assistant to resolve your queries or to learn more.</p>
+            <button class="content-btn">Get Started</button>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; 2025 Faculty of Computer Technology - System and IT Wing</p>
+        <p>Secure Access Only | Version 3.2.1</p>
+    </div>
+    
+    <script>
+        // Toggle sidebars
+        const sidebar = document.getElementById('sidebar');
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const mainContent = document.querySelector('.main-content');
+        const rightSidebar = document.getElementById('rightSidebar');
+        const footer = document.querySelector('.footer');
+        
+        // Chatbot functionality
+        const chatbotMessages = document.getElementById('chatbotMessages');
+        const chatbotUserInput = document.getElementById('chatbotUserInput');
+        const chatbotSendBtn = document.getElementById('chatbotSendBtn');
+        const chatbotCloseBtn = document.getElementById('chatbotCloseBtn');
+        
+        // Handle sending messages
+        function sendChatbotMessage() {
+            const message = chatbotUserInput.value.trim();
+            if (message) {
+                // Add user message
+                const userMessage = document.createElement('div');
+                userMessage.className = 'message user-message';
+                userMessage.innerHTML = `<p>${message}</p>`;
+                chatbotMessages.appendChild(userMessage);
+                
+                // Clear input
+                chatbotUserInput.value = '';
+                
+                // Scroll to bottom
+                chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+                
+                // Simulate bot response (you can replace this with actual API call)
+                setTimeout(() => {
+                    const botMessage = document.createElement('div');
+                    botMessage.className = 'message bot-message';
+                    botMessage.innerHTML = `<p>I understand you want to know about: ${message}</p>`;
+                    chatbotMessages.appendChild(botMessage);
+                    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+                }, 1000);
+            }
+        }
+        
+        chatbotSendBtn.addEventListener('click', sendChatbotMessage);
+        chatbotUserInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendChatbotMessage();
+            }
+        });
+        
+        // Close chatbot section
+        chatbotCloseBtn.addEventListener('click', () => {
+            document.querySelector('.chatbot-section').style.display = 'none';
+        });
+        
+        // Load content function
+        function loadContent(contentType) {
+    const contentArea = document.getElementById('contentArea');
+    let title = '';
+    let icon = '';
+    let description = '';
+    let moduleLink = '#';
+
+    // Update active module
+    document.querySelectorAll('.training-module').forEach(module => {
+        module.classList.remove('active');
+    });
+    event.currentTarget.classList.add('active');
+
+    switch(contentType) {
+        case 'basic-training':
+            title = 'Basic Python Training';
+            icon = 'fa-book';
+            description = 'Know the basics of Python to kickstart your journey.';
+            moduleLink = 'basic_python/basic.html';
+            break;
+        case 'cyber':
+            title = 'Cyber Security';
+            icon = 'fa-shield-alt';
+            description = 'Comprehensive cyber security training covering defense strategies and threat mitigation.';
+            moduleLink = 'cybersec/cybersec.html';
+            break;
+        case 'data-viz':
+            title = 'Data Visualization';
+            icon = 'fa-chart-bar';
+            description = 'Master data visualization techniques for effective intelligence presentation.';
+            moduleLink = 'data/data.html';
+            break;
+        case 'ai-ml':
+            title = 'Artificial Intelligence & Machine Learning';
+            icon = 'fa-brain';
+            description = 'Cutting-edge AI and ML applications for military technology and strategy.';
+            moduleLink = 'AIML/aiml.html';
+            break;
+        case 'practice':
+            window.location.href = "practice_python/practice.html";
+            return;
+        default:
+            title = 'Welcome to Command Center';
+            icon = 'fa-flag';
+            description = 'Select a training module from the left sidebar to begin your learning journey.';
+    }
+
+    contentArea.innerHTML = `
+        <i class="fas ${icon}"></i>
+        <h2>${title}</h2>
+        <p>${description}</p>
+        <a href="${moduleLink}">
+            <button class="content-btn">Get Started</button>
+        </a>
+    `;
+
+    // Add hover animation
+    contentArea.style.transform = 'translateY(0)';
+    setTimeout(() => {
+        contentArea.style.transform = 'translateY(-5px)';
+        setTimeout(() => {
+            contentArea.style.transform = 'translateY(0)';
+        }, 100);
+    }, 10);
+}
+        
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            if (window.innerWidth <= 992) {
+                mainContent.style.marginRight = '0';
+                rightSidebar.style.transform = 'translateX(100%)';
+            } else {
+                mainContent.style.marginRight = '320px';
+                rightSidebar.style.transform = 'translateX(0)';
+            }
+        });
+    </script>
+</body>
+</html>

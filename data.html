@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Python Learning Platform</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="styles_data.css">
+</head>
+<body>  
+
+  <!-- Sidebar Navigation -->
+  <nav>
+    <div class="nav-header">
+      <h2>Data Visualization</h2>
+    </div>
+    <div class="problem-list">
+      <ul id="topics">
+        <li onclick="loadQuestion('intro')" class="active">
+  <i class="fas fa-info-circle"></i><span>Introduction</span>
+</li>
+<li onclick="loadQuestion('t1')">
+  <i class="fas fa-chart-line"></i><span>Line Chart</span>
+</li>
+<li onclick="loadQuestion('t2')">
+  <i class="fas fa-chart-bar"></i><span>Bar Chart</span>
+</li>
+<li onclick="loadQuestion('t3')">
+  <i class="fas fa-stream"></i><span>Histogram</span>
+</li>
+<li onclick="loadQuestion('t4')">
+  <i class="fas fa-square"></i><span>Box Plot</span>
+</li>
+<li onclick="loadQuestion('t5')">
+  <i class="fas fa-braille"></i><span>Scatter Plot</span>
+</li>
+<li onclick="loadQuestion('t6')">
+  <i class="fas fa-chart-pie"></i><span>Pie Chart</span>
+</li>
+<li onclick="loadQuestion('t7')">
+  <i class="fas fa-chart-area"></i><span>Area Chart</span>
+</li>
+<li onclick="loadQuestion('t8')">
+  <i class="fas fa-layer-group"></i><span>Stacked Bar Chart</span>
+</li>
+<li onclick="loadQuestion('t9')">
+  <i class="fas fa-align-left"></i><span>Horizontal Bar Chart</span>
+</li>
+<li onclick="loadQuestion('t10')">
+  <i class="fas fa-circle-notch"></i><span>Donut Chart</span>
+</li>
+
+      </ul>
+
+      
+    </div>       
+    
+  </nav>
+
+  <!-- Main Content -->
+  <div class="content">
+    <div class="header">
+      <h1>Data visualization tools platform</h1>
+    </div>
+
+    <div class="main-content">
+      <!-- Question Area -->
+      <div id="questionArea" class="question-box">
+        <h2><i class="fas fa-question-circle"></i> Welcome to Python Training Camp</h2>
+        <p>Select a challenge from the sidebar to begin your Python training mission.</p>
+      </div>
+
+      <!-- Code Editor -->
+      <div class="code-editor">
+        <div class="editor-header">
+          <h3><i class="fas fa-code"></i> Code Editor</h3>
+          <button class="run-btn" onclick="runCode()"><i class="fas fa-play"></i> Run Code</button>
+        </div>
+
+        <div class="editor-wrapper">
+             <div id="highlighted-code" class="editor-background"></div>
+             <div id="code" class="editor-foreground" contenteditable="true"></div>
+        </div>
+  
+
+         <!-- Input Section -->
+       
+      </div>
+
+      <!-- Output -->
+      <div class="output-container">
+        <div class="output-header">
+          <h3><i class="fas fa-terminal"></i> Output</h3>
+        </div>
+        <div id="output"># Your program output will appear here...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Dialog -->
+  <div id="simpleDialog" class="modal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeDialog()">&times;</span>
+      <div id="dialogContent"></div>
+    </div>
+  </div>
+
+  <!-- JS Scripts -->
+  <script src="questions_data.js"></script>
+  <script src="main_data.js"></script>
+</body>
+</html>

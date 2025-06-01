@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Python Learning Platform</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>  
+
+  <!-- Sidebar Navigation -->
+  <nav>
+    <div class="nav-header">
+      <h2></h2>
+    </div>
+    <div class="problem-list">
+        <ul id="topics">
+      <li onclick="loadQuestion('q1')" class="active">
+        <span>Swap Numbers</span>
+        <div class="badge">Easy</div>
+      </li>
+      <li onclick="loadQuestion('q2')">
+        <span>Even or Odd</span>
+        <div class="badge">Easy</div>
+      </li>
+      <li onclick="loadQuestion('q3')">
+        <span>Status Check</span>
+        <div class="badge">Easy</div>
+      </li>
+      <li onclick="loadQuestion('q4')">
+        <span>Multiplication Table</span>
+        <div class="badge">Easy</div>
+      </li>
+      <li onclick="loadQuestion('q5')">
+        <span>Even Index Chars</span>
+        <div class="badge">Easy</div>
+      </li>
+      <li onclick="loadQuestion('q6')">
+        <span>Squares While Loop</span>
+        <div class="badge">Easy</div>
+      </li>
+      <li onclick="loadQuestion('q7')">
+        <span>Convert Negative to Zero</span>
+        <div class="badge">Easy</div>
+      </li>
+      <li onclick="loadQuestion('q8')">
+        <span>Cat and Hat Count</span>
+        <div class="badge">Easy</div>
+      </li>
+      <li onclick="loadQuestion('q9')">
+        <span>Else Statement</span>
+        <div class="badge">Easy</div>
+      </li>
+      <li onclick="loadQuestion('q10')">
+        <span>FizzBuzz</span>
+        <div class="badge">Easy</div>
+        <li onclick="loadQuestion('q11')">
+          <span>Even odd Game</span>
+          <div class="badge">Easy</div>
+          <li onclick="loadQuestion('q12')">
+            <span>Greatest Of Three</span>
+            <div class="badge">Easy</div>
+            <li onclick="loadQuestion('q13')">
+              <span>Leap Year</span>
+              <div class="badge">Easy</div>
+              <li onclick="loadQuestion('q14')">
+                <span>Simple Calculator</span>
+                <div class="badge">Easy</div>
+                <li onclick="loadQuestion('q15')">
+                  <span>Sum of Natural Numbers </span>
+                  <div class="badge">Easy</div>
+                  <li onclick="loadQuestion('q16')">
+                    <span>Closest Number</span>
+                    <div class="badge">Easy</div>
+                    <li onclick="loadQuestion('q17')">
+                      <span>The Dice Problem </span>
+                      <div class="badge">Easy</div>
+                      <li onclick="loadQuestion('q18')">
+                        <span>Overlapping Rectangles</span>
+                        <div class="badge">Easy</div>
+                        <li onclick="loadQuestion('q19')">
+                          <span>Last Digit of a Number</span>
+                          <div class="badge">Easy</div>
+                          <li onclick="loadQuestion('q20')">
+                            <span>Int Str</span>
+                            <div class="badge">Easy</div>
+                            <li onclick="loadQuestion('q21')">
+                              <span>Check the Status</span>
+                              <div class="badge">Easy</div>
+                              <li onclick="loadQuestion('q22')">
+                                <span>Type Conversion</span>
+                                <div class="badge">Easy</div>
+                                <li onclick="loadQuestion('q23')">
+                                  <span>Bitwise Operator</span>
+                                  <div class="badge">Easy</div>
+                                  <li onclick="loadQuestion('q24')">
+                                    <span>Multipriting</span>
+                                    <div class="badge">Easy</div>
+                                    <li onclick="loadQuestion('q25')">
+                                      <span>Arithmetic Operator</span>
+                                      <div class="badge">Easy</div>
+                                      <li onclick="loadQuestion('q26')">
+                                        <span>Modulo Task</span>
+                                        <div class="badge">Easy</div>
+                                        <li onclick="loadQuestion('q27')">
+                                          <span>For Loop </span>
+                                          <div class="badge">Medium</div>
+                                          <li onclick="loadQuestion('q28')">
+                                            <span>While Loop</span>
+                                            <div class="badge">Medium</div>
+                                            <li onclick="loadQuestion('q29')">
+                                              <span>Table Difference </span>
+                                              <div class="badge">Medium</div>
+                                              <li onclick="loadQuestion('q30')">
+                                                <span>Print Square Wall</span>
+                                                <div class="badge">Medium</div>
+                                                <li onclick="loadQuestion('q31')">
+                                                  <span>Right Angled Triangle </span>
+                                                  <div class="badge">Medium</div>
+                                                  <li onclick="loadQuestion('q32')">
+                                                    <span>Right Angled Triangle </span>
+                                                    <div class="badge">Medium</div>
+                                                    <li onclick="loadQuestion('q33')">
+                                                      <span>Right Angled Triangle (b)</span>
+                                                      <div class="badge">Medium</div>
+                                                      <li onclick="loadQuestion('q34')">
+                                                        <span>Inverted Right Angled Triangle </span>
+                                                        <div class="badge">Medium</div>
+                                                        <li onclick="loadQuestion('q35')">
+                                                          <span>Factorial </span>
+                                                          <div class="badge">Medium</div>
+                                                          <li onclick="loadQuestion('q36')">
+                                                            <span>Divisor </span>
+                                                            <div class="badge">Medium</div>
+                                                            <li onclick="loadQuestion('q37')">
+                                                              <span>Check Prime</span>
+                                                              <div class="badge">Medium</div>
+                                                              <li onclick="loadQuestion('q38')">
+                                                                <span>Fibonacci Series </span>
+                                                                <div class="badge">Medium</div>
+                                                                <li onclick="loadQuestion('q39')">
+                                                                  <span>G C D </span>
+                                                                  <div class="badge">Medium</div>
+                                                                  <li onclick="loadQuestion('q40')">
+                                                                    <span>L C M </span>
+                                                                    <div class="badge">Medium</div>
+                                                                    <li onclick="loadQuestion('q41')">
+                                                                      <span>Pattern X </span>
+                                                                      <div class="badge">Medium</div>
+                                                                      <li onclick="loadQuestion('q42')">
+                                                                        <span> Armstrong Number</span>
+                                                                        <div class="badge"> Medium</div>
+                                                                        <li onclick="loadQuestion('q43')">
+                                                                          <span>No of bits </span>
+                                                                          <div class="badge">Medium</div>
+                                                                          <li onclick="loadQuestion('q44')">
+                                                                            <span>Perfect Number</span>
+                                                                            <div class="badge">Medium</div>
+                                                                            <li onclick="loadQuestion('q45')">
+                                                                              <span>Evaluate Formula </span>
+                                                                              <div class="badge">Medium</div>
+                                                                              <li onclick="loadQuestion('q46')">
+                                                                                <span>AP </span>
+                                                                                <div class="badge">Medium</div>
+                                                                                <li onclick="loadQuestion('q47')">
+                                                                                  <span>GP</span>
+                                                                                  <div class="badge">Medium</div>
+                                                                                  <li onclick="loadQuestion('q48')">
+                                                                                    <span>Celsius to Farenhiet </span>
+                                                                                    <div class="badge">Medium</div>
+                                                                                    <li onclick="loadQuestion('q49')">
+                                                                                      <span>Sum of AP</span>
+                                                                                      <div class="badge">Medium</div>
+                                                                                      <li onclick="loadQuestion('q50')">
+                                                                                        <span>Adam's Number </span>
+                                                                                        <div class="badge">Medium</div>
+                                                                                        <li onclick="loadQuestion('q51')">
+                                                                                          <span>Subtract 1 using Bitwise Operator  </span>
+                                                                                          <div class="badge">Medium</div>
+                                                                                          <li onclick="loadQuestion('q52')">
+                                                                                            <span>Decimal to Binary </span>
+                                                                                            <div class="badge">Medium</div>
+                                                                                            <li onclick="loadQuestion('q53')">
+                                                                                              <span>LCM & GCD </span>
+                                                                                              <div class="badge">Medium</div>
+                                                                                              <li onclick="loadQuestion('q54')">
+                                                                                                <span>String Duplicate Removal </span>
+                                                                                                <div class="badge">Hard</div>
+                                                                                                <li onclick="loadQuestion('q55')">
+                                                                                                  <span>Union of Arrays</span>
+                                                                                                  <div class="badge">Hard</div>
+                                                                                                  <li onclick="loadQuestion('q56')">
+                                                                                                    <span>Create Acronyms Using Python</span>
+                                                                                                    <div class="badge">Hard</div>
+                                                                                                    <li onclick="loadQuestion('q57')">
+                                                                                                      <span>Anagram </span>
+                                                                                                      <div class="badge">Hard</div>
+                                                                                                      <li onclick="loadQuestion('q58')">
+                                                                                                        <span>Type of IP Address using Regex </span>
+                                                                                                        <div class="badge">Hard</div>
+                                                                                                        <li onclick="loadQuestion('q59')">
+                                                                                                          <span>Password Validation using Regex </span>
+                                                                                                          <div class="badge">Hard</div>
+                                                                                                          <li onclick="loadQuestion('q60')">
+                                                                                                            <span>Phone Number Extraction </span>
+                                                                                                            <div class="badge">Hard</div>
+                                                                                                            <li onclick="loadQuestion('61')">
+                                                                                                              <span>Password Strength Checker </span>
+                                                                                                              <div class="badge">Hard</div>
+                                                                                                              
+                                                                  
+      </li>
+    </ul>
+      
+    </div>       
+    
+  </nav>
+
+  <!-- Main Content -->
+  <div class="content">
+    <div class="header">
+      <h1>Python Training Camp</h1>
+    </div>
+
+    <div class="main-content">
+      <!-- Question Area -->
+      <div id="questionArea" class="question-box">
+        <h2><i class="fas fa-question-circle"></i> Welcome to Python Training Camp</h2>
+        <p>Select a challenge from the sidebar to begin your Python training mission.</p>
+      </div>
+
+      <!-- Code Editor -->
+      <div class="code-editor">
+        <div class="editor-header">
+          <h3><i class="fas fa-code"></i> Code Editor</h3>
+          <button class="run-btn" onclick="runCode()"><i class="fas fa-play"></i> Run Code</button>
+        </div>
+
+        <div class="editor-wrapper">
+             <div id="highlighted-code" class="editor-background"></div>
+             <div id="code" class="editor-foreground" contenteditable="true"></div>
+        </div>
+  
+
+         <!-- Input Section -->
+        <div class="input-section">
+          <label for="userInput"><i class="fas fa-keyboard"></i> User Input (if needed):</label>
+          <input type="text" id="userInput" placeholder="Enter input for your code...">
+        </div>
+      </div>
+
+      <!-- Output -->
+      <div class="output-container">
+        <div class="output-header">
+          <h3><i class="fas fa-terminal"></i> Output</h3>
+        </div>
+        <div id="output"># Your program output will appear here...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Dialog -->
+  <div id="simpleDialog" class="modal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeDialog()">&times;</span>
+      <div id="dialogContent"></div>
+    </div>
+  </div>
+
+  <!-- JS Scripts -->
+  <script>
+    
+  </script>
+  <script src="main.js"></script>
+</body>
+</html>
